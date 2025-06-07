@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'monument-grotesk';
+    src: url('/public/MonumentGrotesk-Regular.ttf') format('truetype');
+
+}
+.nav__section{
+    width: 100vw;
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 1rem;
+    font-family: monument-grotesk;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* margin-bottom: 2rem; */
+}
+.nav__section a{
+    text-decoration: none;
+    color: #8B3D6B;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
