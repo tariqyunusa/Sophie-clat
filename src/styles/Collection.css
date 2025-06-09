@@ -1,0 +1,136 @@
+@font-face {
+  font-family: "PPPlayground";
+  src: url("/public/public/PPPlayground-Thin.otf") format("opentype");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "ABCMonumentGrotesk";
+  src: url("/public/MonumentGrotesk-Regular.ttf") format("truetype");
+}
+.collections__section {
+  width: 100vw;
+  height: 100vh;
+  background-color: #e7d5e4;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 1rem;
+  position: relative;
+}
+.collection__main{
+    margin-top: 10rem;
+    /* background-color: black; */
+    width: 100%;
+    height: 90%;
+}
+fieldset{
+   display: flex; 
+   justify-content: center;
+   align-items: center;
+   border: none;
+   gap: 1rem;
+   align-items: center;
+}
+fieldset input {
+    margin-right: 0.5rem;
+    background-color: #8B3D6B;
+}
+input[type="radio"] {
+  display: none;
+}
+
+
+label {
+  position: relative;
+  padding-left: 1.5rem;
+  cursor: pointer;
+  font-family: ABCMonumentGrotesk;
+  color: #8B3D6B;
+  text-transform: uppercase;
+}
+
+
+label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+   transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 1px solid #8B3D6B;
+  border-radius: 50%;
+  background-color: transparent; 
+}
+
+input[type="radio"]:checked + label::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 23%;
+  width: 12px;
+  height: 12px;
+  background-color: #8B3D6B; 
+  border-radius: 50%;
+}
+fieldset label {
+    font-family:ABCMonumentGrotesk ;
+    text-transform: uppercase;
+    color: #8B3D6B;
+}
+.color__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(139, 61, 107, 0.2); 
+  pointer-events: none;
+  z-index: 1;
+}
+.list__name{
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.list__year{
+    font-family: PPPlayground;
+    font-weight: 300;
+    line-height: 50%;
+}
+.collection_grid{
+    width: 100%;
+    margin-top: 3rem;
+    display: flex;
+    flex: 1;
+    position: absolute;
+    left: 0;
+    height:576px; 
+}
+.collection__item_detail_grid{
+    display: flex;
+    padding-left: 1rem;
+    color: #8B3D6B;
+    align-items: center;
+    gap: 0.2rem;
+}
+.collection__subitems_grid{
+    padding-left: 1rem;
+    line-height: 150%;
+    color: #B27E9C;
+}
+.collection__item_grid_img{
+    width: 324px;
+    height: 420px;
+    margin-top: 3rem;
+    position: relative;
+}
+.grid__img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.collection__item_grid{
+    height: 100%;
+}
+.collection__item_grid_img:nth-child(1) {
+     width: 324px;
+}
