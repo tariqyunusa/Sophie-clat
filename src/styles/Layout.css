@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "PPPlayground";
+  src: url("/public/public/PPPlayground-Thin.otf") format("opentype");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "ABCMonumentGrotesk";
+  src: url("/public/MonumentGrotesk-Regular.ttf") format("truetype");
+}
+.container.grid{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 4rem;
+    width: 100%;
+}
+.grid__container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 2rem;
+}
+.grid__item_detail{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.grid__item_name{
+    font-family: ABCMonumentGrotesk;
+    text-transform: uppercase;
+    color: #8B3D6B;
+    font-weight: 700;
+}
+.grid__item_year{
+    font-family: PPPlayground;
+    text-transform: uppercase;
+    color: #8B3D6B;
+    font-weight: 300;
+}
+.grid__subitems_items{
+    line-height: 150%;
+    color: #B27E9C;
+}
+.grid__upper{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.grid__lower{
+    display: flex;
+    justify-content: space-between;
+    /* padding: 0 1rem; */
+    position: relative;
+    left: -1rem;
+}
+.image__wrapper{
+     width: 20.25rem;
+     aspect-ratio: 3/4;
+     overflow: hidden;
+     padding:  0;
+     position: relative;
+}
+.image__wrapper img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+@media screen and (max-width: 1024px) {
+    .image__wrapper{
+        width: 12.7rem;
+    }
+    
+}
+@media screen and (max-width: 768px) {
+    .image__wrapper{
+        width: 9.6rem;
+    }
+    .image__wrapper:nth-child(3){
+        display: none;
+    }
+    
+}

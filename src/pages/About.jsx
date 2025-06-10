@@ -1,7 +1,7 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import "../styles/About.css";
-import sophie from "/sophie.jpg";
+import sophie from "/sophie.webp";
 import { Link } from "react-router-dom";
 
 const About = () => {
