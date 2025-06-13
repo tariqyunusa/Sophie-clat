@@ -31,7 +31,7 @@ const About = () => {
         </div>
         <div className="about__personal">
           <div className="about__image_container">
-            <div className="image__wrapper">
+            <div className="image__wrapper__sophie">
               <img src={sophie} alt="sophie" />
               <div className="color__overlay"></div>
             </div>

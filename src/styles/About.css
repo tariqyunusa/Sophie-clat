@@ -58,11 +58,12 @@
   margin-top: 1.5rem;
 }
 .about__personal {
-
+  /* padding-bottom: 2rem; */
   width: 100%;
   height: 50%;
   display: flex;
   gap: 2rem;
+  /* padding: 2rem 0; */
 }
 .about__image_container{
     width: 35%;
@@ -71,18 +72,19 @@
     width: 65%;
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 3rem;
     justify-content: end;
     padding-inline: 1rem;
+    /* padding: 2rem 0; */
 }
-.image__wrapper{
+.image__wrapper__sophie{
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
 
 }
-.image__wrapper img{
+.image__wrapper__sophie img{
     width: 100%;
     height: 100%;
     object-fit: cover;
