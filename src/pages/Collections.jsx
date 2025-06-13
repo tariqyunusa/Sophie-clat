@@ -9,33 +9,15 @@ gsap.registerPlugin(Flip)
 
 
 const Collections = () => {
-  const [layout, setLayout] = useState("grid")
-  const [pendingLayout, setPendingLayout] = useState("grid");
+  const [layout, setLayout] = useState("zoetrope")
   const handleLayoutChange = (e) => {
     const newLayout = e.target.value
 
     if(newLayout === 'zoetrope') {
       setLayout(newLayout)
-      setPendingLayout(newLayout);
       return;
     }
- const state = Flip.getState('[data-flip-id]');
-
-  // Step 1: change layout
   setLayout(newLayout);
-
-  // Step 2: wait for React to paint new layout
-  requestAnimationFrame(() => {
-    // delay to let images mount
-    setTimeout(() => {
-      Flip.from(state, {
-        duration: 0.7,
-        ease: "power2.inOut",
-        absolute: true,
-        stagger: 0.05,
-      });
-    }, 0); // or try 20-50ms if needed
-  });
   }
 
   return (

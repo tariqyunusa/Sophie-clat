@@ -1,38 +1,43 @@
-import React, { useEffect, useLayoutEffect, useRef,} from "react";
+import React, {
+  useRef,
+  useState,
+  useLayoutEffect,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
 import "../styles/Layout.css";
-import { Canvas } from "@react-three/fiber";
+import { useFrame, useLoader, useThree, Canvas } from "@react-three/fiber";
+import { OrbitControls } from '@react-three/drei';
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import { Flip } from "gsap/Flip";
-gsap.registerPlugin(Flip);
+import Zoetrope from "./Zoetrope";
 
-const Layout = ({ layout, items, onFlipComplete  }) => {
+
+
+const Layout = ({ layout, items }) => {
   const containerRef = useRef(null);
   const borderRef = useRef([]);
   const imageRefs = useRef([]);
     imageRefs.current = [];
 
   useLayoutEffect(() => {
+     if (layout !== "list") return;
     gsap.registerPlugin(ScrollTrigger)
-    borderRef.current.forEach((el, idx) => {
-      if(!el) return;
+    borderRef.current.forEach((el) => {
+    if (!el) return;
+    gsap.set(el, { width: "0%" });
+    gsap.to(el, {
+      width: "100%",
+      duration: 1,
+      ease: "power2.inOut",
+      stagger: 0.2,
+    });
+  });
+  },[layout])
 
-      gsap.fromTo(el, {
-        width: "0%"
-      }, {
-        width: "100%",
-        duration: 1,
-        ease: "power2.inOut",
-        stagger: 1.5,
-        scrollTrigger:  {
-          trigger: ".list",
-          start: "top center",
-          toggleActions: "play none none none"
-        }
-      })
-    })
-  },[])
+
  useLayoutEffect(() => {
+  if(layout !== 'zoetrope') return;
     const direction = layout === "grid" ? 500 : -100; 
 
     gsap.fromTo(
@@ -40,7 +45,8 @@ const Layout = ({ layout, items, onFlipComplete  }) => {
       {
         x: direction,
         opacity: 0,
-        scale: 0.95
+        scale: 0.95,
+        delay: layout === 'list' ? 1 : 0
       },
       {
         x: 0,
@@ -52,15 +58,17 @@ const Layout = ({ layout, items, onFlipComplete  }) => {
       }
     );
   }, [layout]);
+
+
   return (
     <div className="layout">
       {layout === "zoetrope" ? (
         <div className="canvas-container">
-          <Canvas camera={{ position: [0, 0, 5] }}>
+          <Canvas camera={{ position: [0, 0, 15], fov: 75}}>
             <ambientLight intensity={0.5} />
             <directionalLight position={[5, 5, 5]} />
             <OrbitControls />
-            <Zoetrope items={items} radius={2} />
+            <Zoetrope items={items}  />
           </Canvas>
         </div>
       ) : (
@@ -126,3 +134,7 @@ const Layout = ({ layout, items, onFlipComplete  }) => {
 };
 
 export default Layout;
+
+
+
+
