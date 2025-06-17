@@ -1,12 +1,9 @@
 import React, {
   useRef,
-  useState,
   useLayoutEffect,
-  useImperativeHandle,
-  forwardRef,
 } from "react";
 import "../styles/Layout.css";
-import { useFrame, useLoader, useThree, Canvas } from "@react-three/fiber";
+import {  Canvas } from "@react-three/fiber";
 import { OrbitControls } from '@react-three/drei';
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
@@ -37,11 +34,11 @@ const Layout = ({ layout, items }) => {
 
 
  useLayoutEffect(() => {
-  if(layout !== 'zoetrope') return;
+   if (layout === "zoetrope") return;
     const direction = layout === "grid" ? 500 : -100; 
 
     gsap.fromTo(
-      imageRefs.current,
+      imageRefs.current.filter(Boolean),
       {
         x: direction,
         opacity: 0,
@@ -64,10 +61,7 @@ const Layout = ({ layout, items }) => {
     <div className="layout">
       {layout === "zoetrope" ? (
         <div className="canvas-container">
-          <Canvas camera={{ position: [0, 0, 15], fov: 75}}>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[5, 5, 5]} />
-            <OrbitControls />
+          <Canvas camera={{ position: [0, 70, 400], fov: 25}}>
             <Zoetrope items={items}  />
           </Canvas>
         </div>

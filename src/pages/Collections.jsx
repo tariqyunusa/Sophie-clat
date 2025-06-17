@@ -2,19 +2,19 @@ import "../styles/Collection.css";
 import Nav from "../components/Nav";
 import { items } from "../utils";
 import Layout from "../components/Layout";
-import { useState, useLayoutEffect } from "react";
-import { Flip } from "gsap/Flip";
-import gsap from "gsap";
-gsap.registerPlugin(Flip)
+import { useState } from "react";
+
 
 
 const Collections = () => {
-  const [layout, setLayout] = useState("zoetrope")
+  const [layout, setLayout] = useState("grid")
   const handleLayoutChange = (e) => {
     const newLayout = e.target.value
 
     if(newLayout === 'zoetrope') {
       setLayout(newLayout)
+      console.log(layout);
+      
       return;
     }
   setLayout(newLayout);
