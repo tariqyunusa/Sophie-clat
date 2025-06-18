@@ -1,41 +1,70 @@
-import React, {
-  useRef,
-  useLayoutEffect,
-} from "react";
+import React, { useRef, useLayoutEffect, useState, useEffect } from "react";
 import "../styles/Layout.css";
-import {  Canvas } from "@react-three/fiber";
-import { OrbitControls } from '@react-three/drei';
+import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
-import {ScrollTrigger} from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Zoetrope from "./Zoetrope";
 
+const useWindowWidth = () => {
+  const [width, setWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return width;
+};
 
 const Layout = ({ layout, items }) => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth < 768;
+  const canvasKey = isMobile ? "mobile" : "desktop";
+
   const containerRef = useRef(null);
   const borderRef = useRef([]);
   const imageRefs = useRef([]);
-    imageRefs.current = [];
+  imageRefs.current = [];
+
+  const [zoetropePhase, setZoetropePhase] = useState("idle");
+  const [showZoetrope, setShowZoetrope] = useState(false);
+
+  useEffect(() => {
+    if (layout === "zoetrope") {
+      setShowZoetrope(true);
+      setZoetropePhase("entering");
+    } else if (showZoetrope) {
+      setZoetropePhase("exiting");
+
+      const timeout = setTimeout(() => {
+        setShowZoetrope(false);
+        setZoetropePhase("idle");
+      }, 800);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [layout]);
 
   useLayoutEffect(() => {
-     if (layout !== "list") return;
-    gsap.registerPlugin(ScrollTrigger)
+    if (layout !== "list") return;
+    gsap.registerPlugin(ScrollTrigger);
     borderRef.current.forEach((el) => {
-    if (!el) return;
-    gsap.set(el, { width: "0%" });
-    gsap.to(el, {
-      width: "100%",
-      duration: 1,
-      ease: "power2.inOut",
-      stagger: 0.2,
+      if (!el) return;
+      gsap.set(el, { width: "0%" });
+      gsap.to(el, {
+        width: "100%",
+        duration: 1,
+        ease: "power2.inOut",
+        stagger: 0.2,
+      });
     });
-  });
-  },[layout])
+  }, [layout]);
 
+  useLayoutEffect(() => {
+    if (layout === "zoetrope") return;
 
- useLayoutEffect(() => {
-   if (layout === "zoetrope") return;
-    const direction = layout === "grid" ? 500 : -100; 
+    const direction = layout === "grid" ? 500 : -100;
 
     gsap.fromTo(
       imageRefs.current.filter(Boolean),
@@ -43,7 +72,7 @@ const Layout = ({ layout, items }) => {
         x: direction,
         opacity: 0,
         scale: 0.95,
-        delay: layout === 'list' ? 1 : 0
+        delay: layout === "list" ? 1 : 0,
       },
       {
         x: 0,
@@ -51,18 +80,20 @@ const Layout = ({ layout, items }) => {
         scale: 1,
         duration: 1.5,
         ease: "power3.out",
-        stagger: 0.05
+        stagger: 0.05,
       }
     );
   }, [layout]);
 
-
   return (
     <div className="layout">
-      {layout === "zoetrope" ? (
+      {showZoetrope ? (
         <div className="canvas-container">
-          <Canvas camera={{ position: [0, 70, 400], fov: 25}}>
-            <Zoetrope items={items}  />
+          <Canvas
+            camera={{ position: [0, 70, 400], fov: 25 }}
+            key={canvasKey}
+          >
+            <Zoetrope items={items} isMobile={isMobile} phase={zoetropePhase} />
           </Canvas>
         </div>
       ) : (
@@ -103,7 +134,12 @@ const Layout = ({ layout, items }) => {
                   />
                   <div className="list__left">
                     <div className="list__img_wrapper">
-                      <img src={item.Img} alt={item.name} data-flip-id={`img-${idx}`} ref={(el) => (imageRefs.current[idx] = el)}/>
+                      <img
+                        src={item.Img}
+                        alt={item.name}
+                        data-flip-id={`img-${idx}`}
+                        ref={(el) => (imageRefs.current[idx] = el)}
+                      />
                     </div>
                     <p className="list__name">{item.name}</p>
                   </div>
@@ -128,7 +164,3 @@ const Layout = ({ layout, items }) => {
 };
 
 export default Layout;
-
-
-
-
