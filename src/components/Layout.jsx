@@ -1,8 +1,8 @@
-import React, { useRef, useLayoutEffect, useState, useEffect } from "react";
+import React, { useRef, useLayoutEffect, useEffect, useState } from "react";
 import "../styles/Layout.css";
 import { Canvas } from "@react-three/fiber";
-import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
 import Zoetrope from "./Zoetrope";
 
 const useWindowWidth = () => {
@@ -28,26 +28,27 @@ const Layout = ({ layout, items }) => {
   imageRefs.current = [];
 
   const [zoetropePhase, setZoetropePhase] = useState("idle");
-  const [showZoetrope, setShowZoetrope] = useState(false);
+  const [showZoetrope, setShowZoetrope] = useState(layout === "zoetrope");
+  const [isZoetropeFullyGone, setIsZoetropeFullyGone] = useState(layout !== "zoetrope");
 
   useEffect(() => {
     if (layout === "zoetrope") {
+      setIsZoetropeFullyGone(false);
       setShowZoetrope(true);
       setZoetropePhase("entering");
     } else if (showZoetrope) {
       setZoetropePhase("exiting");
-
       const timeout = setTimeout(() => {
         setShowZoetrope(false);
-        setZoetropePhase("idle");
-      }, 800);
-
+        setIsZoetropeFullyGone(true);
+      }, 1000); 
       return () => clearTimeout(timeout);
     }
   }, [layout]);
 
   useLayoutEffect(() => {
-    if (layout !== "list") return;
+    if (layout !== "list" || !isZoetropeFullyGone) return;
+
     gsap.registerPlugin(ScrollTrigger);
     borderRef.current.forEach((el) => {
       if (!el) return;
@@ -59,10 +60,10 @@ const Layout = ({ layout, items }) => {
         stagger: 0.2,
       });
     });
-  }, [layout]);
+  }, [layout, isZoetropeFullyGone]);
 
   useLayoutEffect(() => {
-    if (layout === "zoetrope") return;
+    if (layout === "zoetrope" || !isZoetropeFullyGone) return;
 
     const direction = layout === "grid" ? 500 : -100;
 
@@ -72,7 +73,6 @@ const Layout = ({ layout, items }) => {
         x: direction,
         opacity: 0,
         scale: 0.95,
-        delay: layout === "list" ? 1 : 0,
       },
       {
         x: 0,
@@ -83,16 +83,13 @@ const Layout = ({ layout, items }) => {
         stagger: 0.05,
       }
     );
-  }, [layout]);
+  }, [layout, isZoetropeFullyGone]);
 
   return (
     <div className="layout">
       {showZoetrope ? (
         <div className="canvas-container">
-          <Canvas
-            camera={{ position: [0, 70, 400], fov: 25 }}
-            key={canvasKey}
-          >
+          <Canvas camera={{ position: [0, 70, 400], fov: 25 }} key={canvasKey}>
             <Zoetrope items={items} isMobile={isMobile} phase={zoetropePhase} />
           </Canvas>
         </div>
@@ -108,9 +105,7 @@ const Layout = ({ layout, items }) => {
                   </div>
                   <div className="grid__subitems">
                     {item.subItems.map((item, i) => (
-                      <p key={i} className="grid__subitem">
-                        {item}
-                      </p>
+                      <p key={i} className="grid__subitem">{item}</p>
                     ))}
                   </div>
                   <div className="grid__img_wrapper">
@@ -145,9 +140,7 @@ const Layout = ({ layout, items }) => {
                   </div>
                   <div className="list__subitems">
                     {item.subItems.map((item, i) => (
-                      <p key={i} className="list__subitem">
-                        {item}
-                      </p>
+                      <p key={i} className="list__subitem">{item}</p>
                     ))}
                   </div>
                   <div className="list__year_wrapper">
