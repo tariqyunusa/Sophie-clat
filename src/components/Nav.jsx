@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../styles/Nav.css'
+import { GoPlus } from "react-icons/go";
 
 const Nav = () => {
   
@@ -13,7 +14,9 @@ const Nav = () => {
       <Link to='/about'>About</Link>
       <a href='/collection'>Collections</a>
       <a href='/'>Gallery</a>
-      <div className="spacer__nav"></div>
+      <div className="spacer__nav">
+       <GoPlus />
+      </div>
     </nav>
   )
 }

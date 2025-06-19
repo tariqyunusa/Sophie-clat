@@ -5,12 +5,12 @@ import * as THREE from "three";
 import gsap from "gsap";
 import CurvedSliceMaterial from "./CurvedMaterial";
 
+
 extend({ CurvedSliceMaterial });
 
 const Zoetrope = ({ items, isMobile, phase }) => {
   const groupRef = useRef();
   const meshRefs = useRef([]);
-
   const radius = isMobile ? 60 : 94;
   const spacingFactor = 1.05;
   const baseAngle = ((2 * Math.PI) / items.length) * 0.95;
@@ -22,43 +22,53 @@ const Zoetrope = ({ items, isMobile, phase }) => {
   );
 
   useEffect(() => {
-  if (!phase || meshRefs.current.length === 0) return;
+    if (!phase || meshRefs.current.length === 0) return;
 
-  if (phase === "entering") {
-    meshRefs.current.forEach((mesh) => {
-      if (!mesh) return;
-      gsap.set(mesh.position, { y: -80 });
-      gsap.set(mesh.material, { opacity: 0 });
-    });
-    gsap.to(meshRefs.current.map((m) => m?.position), {
-      y: 0,
-      duration: 1,
-      ease: "power3.out",
-    });
+    if (phase === "entering") {
+      meshRefs.current.forEach((mesh) => {
+        if (!mesh) return;
+        gsap.set(mesh.position, { y: -80 });
+        gsap.set(mesh.material, { opacity: 0 });
+      });
+      gsap.to(
+        meshRefs.current.map((m) => m?.position),
+        {
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+        }
+      );
 
-    gsap.to(meshRefs.current.map((m) => m?.material), {
-      opacity: 1,
-      duration: 0.8,
-      ease: "power2.out",
-    });
-  }
+      gsap.to(
+        meshRefs.current.map((m) => m?.material),
+        {
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+        }
+      );
+    }
 
-  if (phase === "exiting") {
-    gsap.to(meshRefs.current.map((m) => m?.position), {
-      y: -80,
-      duration: 0.8,
-      ease: "power2.in",
-    });
+    if (phase === "exiting") {
+      gsap.to(
+        meshRefs.current.map((m) => m?.position),
+        {
+          y: -80,
+          duration: 0.8,
+          ease: "power2.in",
+        }
+      );
 
-    gsap.to(meshRefs.current.map((m) => m?.material), {
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.in",
-    });
-  }
-}, [phase]);
-
-
+      gsap.to(
+        meshRefs.current.map((m) => m?.material),
+        {
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.in",
+        }
+      );
+    }
+  }, [phase]);
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
@@ -91,7 +101,7 @@ const Zoetrope = ({ items, isMobile, phase }) => {
             angle={curvedAngle}
             thetaOffset={idx * baseAngle * spacingFactor}
             transparent
-            opacity={0}
+            opacity={1}
             side={THREE.DoubleSide}
             lightColor={new THREE.Color("#8B3D6B")}
             ambientStrength={0.3}

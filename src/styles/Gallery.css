@@ -1,0 +1,9 @@
+.gallery__section{
+    width: 100vw;
+    height: 100vh;
+    background-color: #E7D5E4;
+
+}
+.gallery {
+    position: relative;
+}

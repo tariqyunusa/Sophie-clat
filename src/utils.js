@@ -30,3 +30,13 @@ export const items = [
     Img: "/image-26.webp",
   },
 ];
+
+export const getImages = () => {
+  const images = []
+
+  for (let i = 1; i <= 28; i++) {
+    images.push(`/image-${i}.webp`)
+  }
+
+  return images
+}

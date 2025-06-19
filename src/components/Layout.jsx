@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import Zoetrope from "./Zoetrope";
+import { Link } from "react-router-dom";
 
 const useWindowWidth = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -89,7 +90,7 @@ const Layout = ({ layout, items }) => {
     <div className="layout">
       {showZoetrope ? (
         <div className="canvas-container">
-          <Canvas camera={{ position: [0, 70, 400], fov: 25 }} key={canvasKey}>
+          <Canvas camera={{ position: [0, 70, 400], fov: 25 }} key={canvasKey} >
             <Zoetrope items={items} isMobile={isMobile} phase={zoetropePhase} />
           </Canvas>
         </div>
@@ -98,7 +99,8 @@ const Layout = ({ layout, items }) => {
           {layout === "grid" ? (
             <div className="grid">
               {items.map((item, idx) => (
-                <div key={idx} className="layout__grid">
+               
+                  <div key={idx} className="layout__grid">
                   <div className="grid__details">
                     <p className="grid__name">{item.name}</p>
                     <p className="grid__year">{item.year}</p>
@@ -109,19 +111,23 @@ const Layout = ({ layout, items }) => {
                     ))}
                   </div>
                   <div className="grid__img_wrapper">
-                    <img
+                    <Link to='/gallery'>
+                      <img
                       src={item.Img}
                       alt={item.name}
                       className="grid__image"
                       ref={(el) => (imageRefs.current[idx] = el)}
                     />
+                    </Link>
                   </div>
                 </div>
+               
               ))}
             </div>
           ) : (
             <div className="list">
               {items.map((item, idx) => (
+                <Link key={idx} to='/gallery'>
                 <div className="layout__list" key={idx}>
                   <div
                     className="animated__border"
@@ -147,6 +153,7 @@ const Layout = ({ layout, items }) => {
                     <p className="list__year">{item.year}</p>
                   </div>
                 </div>
+                </Link>
               ))}
             </div>
           )}
