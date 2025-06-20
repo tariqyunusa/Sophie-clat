@@ -11,13 +11,15 @@
   height: 100%;
   object-fit: cover;
   filter: grayscale(80%);
+  filter: brightness(50%);
+
 
 }
 
 
 .slider__thumbnails-container {
   position: absolute;
-  top: 50%;
+  top: 40%;
   right: 100px;
   transform: translateY(-50%);
   display: flex;
@@ -30,4 +32,19 @@
 
 .slider__thumbnails.active  img{
  filter: grayscale(0%) ;
+}
+.slider{
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+.gallery__canvas_wrapper{
+  width: 100%;
+  height: 100%;
+}
+.gallery__canvas_wrapper canvas{
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: transparent;
 }

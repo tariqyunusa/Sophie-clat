@@ -12,8 +12,8 @@ const Nav = () => {
         <Link to='/'>Sophie’s Éclat</Link>
       </div>
       <Link to='/about'>About</Link>
-      <a href='/collection'>Collections</a>
-      <a href='/'>Gallery</a>
+      <Link to='/collection'>Collections</Link>
+      <Link to='/gallery'>Gallery</Link>
       <div className="spacer__nav">
        <GoPlus />
       </div>

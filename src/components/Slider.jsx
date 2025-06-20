@@ -1,27 +1,28 @@
 import { Canvas, useLoader } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TextureLoader } from "three";
 import "../styles/Slider.css";
 
-const DisplayPlane = ({ imageUrl }) => {
-  const texture = useLoader(TextureLoader, imageUrl);
+const DisplayPlane = ({ texture }) => {
   const meshRef = useRef();
 
   return (
-    <mesh ref={meshRef}>
+    <mesh ref={meshRef} position={[0, 0.6, 0]}>
       <planeGeometry args={[3, 4]} />
       <meshBasicMaterial map={texture} toneMapped={false} />
     </mesh>
   );
 };
-const getWrappedIndex = (idx, length) => {
-  return ((idx % length) + length) % length;
-};
+
+const getWrappedIndex = (idx, length) => ((idx % length) + length) % length;
 
 const Slider = ({ images }) => {
   const [selected, setSelected] = useState(0);
-  const visibleCount = 7;
+  const visibleCount = 10;
   const centerIndex = Math.floor(visibleCount / 2);
+  const scrollTimeout = useRef(null);
+
+  const textures = useLoader(TextureLoader, images);
 
   const getVisibleThumbnails = () => {
     const result = [];
@@ -36,14 +37,35 @@ const Slider = ({ images }) => {
     return result;
   };
 
+  useEffect(() => {
+    const handleScroll = (e) => {
+      e.preventDefault();
+      if (scrollTimeout.current) return;
+
+      const delta = e.deltaY;
+      if (delta > 0) {
+        setSelected((prev) => getWrappedIndex(prev + 1, images.length));
+      } else {
+        setSelected((prev) => getWrappedIndex(prev - 1, images.length));
+      }
+
+      scrollTimeout.current = setTimeout(() => {
+        scrollTimeout.current = null;
+      }, 200);
+    };
+
+    window.addEventListener("wheel", handleScroll, { passive: false });
+    return () => window.removeEventListener("wheel", handleScroll);
+  }, [images.length]);
+
   const thumbnails = getVisibleThumbnails();
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
-      <div style={{ flex: 1 }}>
+    <div className="slider">
+      <div className="gallery__canvas_wrapper">
         <Canvas camera={{ position: [0, 0, 5] }}>
           <ambientLight />
-          <DisplayPlane imageUrl={images[selected]} />
+          <DisplayPlane texture={textures[selected]} />
         </Canvas>
       </div>
       <div className="slider__thumbnails-container">
