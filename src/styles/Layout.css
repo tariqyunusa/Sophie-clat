@@ -89,6 +89,9 @@ canvas{
     flex-direction: column;   
     padding-inline: 1rem;
 }
+.list a {
+    text-decoration: none;
+}
 .layout__list{
     display: flex;
     align-items: center;
