@@ -6,18 +6,17 @@ import Slider from "../components/Slider";
 
 const Gallery = () => {
   const images = getImages();
-  console.log(images);
 
   return (
     <section className="gallery__section">
       <Nav />
       <main className="gallery__section_main">
-        <Link>Back to Collections</Link>
+        {/* <Link>Back to Collections</Link> */}
         <div className="gallery">
-          <div>
+          {/* <div>
             <h1>Allure Grace</h1>
             <p>(2024)</p>
-          </div>
+          </div> */}
           <Slider images={images}/>
         </div>
       </main>

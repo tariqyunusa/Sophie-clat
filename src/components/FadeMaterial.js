@@ -7,7 +7,7 @@ const FadeMaterial = shaderMaterial(
     texture2: null,
     mixFactor: 0,
   },
-
+  // Vertex Shader
   `
     varying vec2 vUv;
     void main() {
@@ -15,7 +15,7 @@ const FadeMaterial = shaderMaterial(
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
   `,
-
+  // Fragment Shader
   `
     uniform sampler2D texture1;
     uniform sampler2D texture2;
@@ -23,11 +23,11 @@ const FadeMaterial = shaderMaterial(
     varying vec2 vUv;
 
     vec3 gammaCorrect(vec3 color) {
-      return pow(color, vec3(2.2)); // convert from sRGB to linear
+      return pow(color, vec3(2.2)); 
     }
 
     vec3 gammaUncorrect(vec3 color) {
-      return pow(color, vec3(1.0 / 2.2)); // convert from linear back to sRGB
+      return pow(color, vec3(1.0 / 2.2)); 
     }
 
     void main() {

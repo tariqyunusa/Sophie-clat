@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'monument-grotesk';
-    src: url('/public/MonumentGrotesk-Regular.ttf') format('truetype');
+    src: url('/MonumentGrotesk-Regular.ttf') format('truetype');
 }
 @font-face {
     font-family: 'F-37Judge-BoldCondensed';
-    src: url('/public/F37Judge-BoldCondensed.ttf') format('truetype');
+    src: url('/F37Judge-BoldCondensed.ttf') format('truetype');
     font-weight: 700;
 }
 @font-face {
@@ -56,29 +56,29 @@
  color: #8b3d6b;
 }
 
+
 .header-1 h1{
   text-align: start;
   margin-left: 10rem;
-  position: relative;
-  /* top: 250px; */
+ 
 }
 .text__wrapper{
  position: relative;
-   /* border: 1px solid black; */
    text-align: center;
-   /* overflow: hidden; */
-
+   overflow: hidden;
 }
 .header-2{
   display: flex;
   gap: 2rem;
   align-items: end;
 }
+
 .header_2__time h1{
   font-family: PPPlayground;
   font-weight: 300;
-  /* font-style: italic; */
   font-size: 8rem;
+  line-height: 0.8;
+ 
 }
 .header_3__spacer{
   display: flex;
@@ -88,9 +88,15 @@
 .main__image{
   width: 226px;
   height: 259px;
+  overflow: hidden;
 }
 .main__image img{
   width: 100%;
   height: 100%;
   object-fit: cover;
+
+}
+.hero__list {
+  display: inline-block; /* or block */
+  transform: translateY(0); /* optional but useful for debugging */
 }
