@@ -78,7 +78,6 @@
   font-weight: 300;
   font-size: 8rem;
   line-height: 0.8;
- 
 }
 .header_3__spacer{
   display: flex;
@@ -97,6 +96,6 @@
 
 }
 .hero__list {
-  display: inline-block; /* or block */
-  transform: translateY(0); /* optional but useful for debugging */
+  display: inline-block; 
+  transform: translateY(0); 
 }

@@ -38,10 +38,14 @@
   line-height: 85%;
   color: #8b3d6b;
 }
+.about__mask{
+  overflow: hidden;
+}
 .about__italics {
   font-family: PPPlayground;
   font-weight: 100;
   font-size: 7rem;
+  line-height: 90%;
 }
 .about__header {
   font-family: F-37Judge-BoldCondensed;
@@ -67,9 +71,10 @@
 }
 .about__image_container{
     width: 35%;
+    overflow: hidden;
 }
 .about__personal_info{
-    width: 65%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -100,6 +105,9 @@
   pointer-events: none;
   z-index: 1;
 }
+.about__personal_text{
+    max-width: 100%;
+}
 .about__personal_text p {
     font-family: ABCMonumentGrotesk;
     font-size: 1.5rem;
@@ -113,6 +121,9 @@
     justify-content: space-between;
     gap: 2rem;
 
+}
+.about__second_section p{
+  text-indent: 2rem;
 }
 .about{
     /* padding: 2rem; */
@@ -144,3 +155,27 @@ font-family: ABCMonumentGrotesk;
     font-size:  1rem;
     color: #8B3D6B;
 }
+.about__paragraph {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  line-height: 1.4;
+  white-space: normal;
+   white-space: pre-wrap;
+   hyphens: auto;
+  word-break: normal;
+  max-width: 90%;
+
+}
+
+.lineParent {
+  overflow: hidden;
+  display: block;
+}
+
+.lineChild {
+  display: block;
+  width: fit-content;
+  word-spacing: 0.03rem;
+}
+
