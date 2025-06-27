@@ -40,6 +40,10 @@
 }
 .about__mask{
   overflow: hidden;
+  padding-top: 1.5rem;   
+  padding-bottom: 1.5rem;   
+  margin-top: -1.5rem;       
+  margin-bottom: -1.5rem; 
 }
 .about__italics {
   font-family: PPPlayground;
@@ -159,9 +163,8 @@ font-family: ABCMonumentGrotesk;
   position: relative;
   display: block;
   overflow: hidden;
-  line-height: 1.4;
+  /* line-height: 1.4; */
   white-space: normal;
-   white-space: pre-wrap;
    hyphens: auto;
   word-break: normal;
   max-width: 90%;

@@ -24,7 +24,7 @@ useEffect(() => {
     linesClass: "lineParent"
   });
   tl.set([".about__italics",".about__header"], {y: 200})
-  tl.set(".image__wrapper__sophie", {y: 370, })
+  tl.set(".image__wrapper__sophie", {y: 370, scale: 0.8 })
   tl.to(".about__italics", {
     y: 0,
   })
@@ -43,7 +43,8 @@ useEffect(() => {
     paddingLeft: "1.2rem" 
   }, "<");
   tl.to(".image__wrapper__sophie", {
-    y: 0
+    y: 0,
+    scale: 1
   }, "-=1.4")
 
 
