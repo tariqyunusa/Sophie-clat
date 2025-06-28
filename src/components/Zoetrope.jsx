@@ -8,17 +8,17 @@ import CurvedSliceMaterial from "./CurvedMaterial";
 
 extend({ CurvedSliceMaterial });
 
-const Zoetrope = ({ items, isMobile, phase }) => {
+const Zoetrope = ({ items, isMobile, phase, images }) => {
   const groupRef = useRef();
   const meshRefs = useRef([]);
-  const radius = isMobile ? 60 : 94;
-  const spacingFactor = 1.05;
-  const baseAngle = ((2 * Math.PI) / items.length) * 0.95;
-  const curvedAngle = baseAngle * 0.95;
+
+  const radius = isMobile ? 60 : 104;
+  const baseAngle = (2 * Math.PI) / images.length;      
+  const curvedAngle = baseAngle * 0.90;                
 
   const textures = useLoader(
     TextureLoader,
-    items.map((i) => i.Img)
+    images
   );
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const Zoetrope = ({ items, isMobile, phase }) => {
     meshRefs.current.forEach((mesh, idx) => {
       if (!mesh) return;
       const theta =
-        (idx * baseAngle * spacingFactor + t * speed) % (2 * Math.PI);
+        (idx * baseAngle  + t * speed) % (2 * Math.PI);
       mesh.material.uniforms.thetaOffset.value = theta;
     });
   });
@@ -99,7 +99,7 @@ const Zoetrope = ({ items, isMobile, phase }) => {
             map={texture}
             radius={radius}
             angle={curvedAngle}
-            thetaOffset={idx * baseAngle * spacingFactor}
+            thetaOffset={idx * baseAngle }
             transparent
             opacity={1}
             side={THREE.DoubleSide}

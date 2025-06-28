@@ -48,6 +48,7 @@ const CurvedSliceMaterial = shaderMaterial(
 
       vec3 tinted = mix(tex.rgb, tex.rgb * lightColor, ambientStrength);
       tinted = pow(tinted, vec3(1.0 / 1.4));
+      tinted *= 1.3; // <--- increase this value for more brightness
 
       gl_FragColor = vec4(tinted, tex.a * opacity); 
     }

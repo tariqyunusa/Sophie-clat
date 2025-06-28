@@ -3,6 +3,7 @@ import Nav from "../components/Nav";
 import { items } from "../utils";
 import Layout from "../components/Layout";
 import { useState } from "react";
+import { zoetropeImages } from "../utils";
 
 
 
@@ -27,20 +28,20 @@ const Collections = () => {
         <div className="collection__selector_mode">
           <fieldset>
             <div>
-              <input type="radio" name="mode" id="grid" value="grid" onChange={handleLayoutChange}/>
+              <input type="radio" name="mode" id="grid" value="grid" onChange={handleLayoutChange} checked={layout === "grid"} />
               <label htmlFor="grid">grid</label>
             </div>
             <div>
-              <input type="radio" name="mode" id="list" value="list" onChange={handleLayoutChange} />
+              <input type="radio" name="mode" id="list" value="list" onChange={handleLayoutChange} checked={layout === "list"} />
               <label htmlFor="list">list</label>
             </div>
             <div>
-              <input type="radio" name="mode" id="zoetrope" value="zoetrope" onChange={handleLayoutChange} />
+              <input type="radio" name="mode" id="zoetrope" value="zoetrope" onChange={handleLayoutChange} checked={layout === "zoetrope"} />
               <label htmlFor="zoetrope">zoetrope</label>
             </div>
           </fieldset>
         </div>
-        <Layout layout={layout} items={items} key="layout" onFlipComplete={() => setLayout(pendingLayout)}/>
+        <Layout layout={layout} items={items} images={zoetropeImages} key="layout" />
       </main>
     </section>
   );

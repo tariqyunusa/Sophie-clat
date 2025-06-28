@@ -40,3 +40,13 @@ export const getImages = () => {
 
   return images
 }
+
+export const zoetropeImages = [
+  "/zoetrope-1.webp",
+  "/zoetrope-2.webp",
+  "/zoetrope-3.webp",
+  "/zoetrope-4.webp",
+  "/zoetrope-5.webp",
+  "/zoetrope-6.webp",
+  "/zoetrope-7.webp",
+]
