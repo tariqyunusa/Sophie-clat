@@ -1,19 +1,31 @@
-import { shaderMaterial } from '@react-three/drei';
-import * as THREE from 'three';
+import { shaderMaterial } from "@react-three/drei";
+import * as THREE from "three";
 
 const FadeMaterial = shaderMaterial(
   {
     texture1: null,
     texture2: null,
     mixFactor: 0,
+    twistFactor: 0.0,
   },
   // Vertex Shader
   `
-    varying vec2 vUv;
-    void main() {
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
+   // Vertex Shader (Add this inside your FadeMaterial)
+uniform float twistFactor;
+varying vec2 vUv;
+
+void main() {
+  vUv = uv;
+  float twist = position.y * twistFactor;
+  float s = sin(twist);
+  float c = cos(twist);
+  vec3 twistedPosition = position;
+  twistedPosition.x = position.x * c - position.z * s;
+  twistedPosition.z = position.x * s + position.z * c;
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(twistedPosition, 1.0);
+}
+
   `,
   // Fragment Shader
   `

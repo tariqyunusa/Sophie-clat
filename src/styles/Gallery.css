@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "F-37Judge-BoldCondensed";
+  src: url("/public/F37Judge-Medium.ttf") format("truetype");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "PPPlayground";
+  src: url("/public/public/PPPlayground-Thin.otf") format("opentype");
+  /* font-weight: 300; */
+}
+@font-face {
+  font-family: "ABCMonumentGrotesk";
+  src: url("/public/MonumentGrotesk-Regular.ttf") format("truetype");
+}
 .gallery__section{
     width: 100vw;
     height: 100vh;
@@ -6,4 +20,40 @@
 }
 .gallery {
     position: relative;
+}
+.gallery__title{
+    position: absolute;
+    top: 20rem;
+    left: 15rem;
+}
+.gallery__title h1{
+    font-family: F-37Judge-BoldCondensed;
+    font-weight: 500;
+    font-size: 3rem;
+    color: #8B3D6B;
+}
+.gallery__title p {
+    font-family: PPPlayground;
+    color: #8B3D6B;
+    font-weight: 100;
+    font-size: 2rem;
+}
+.gallery__section_main{
+    position: relative;
+}
+.gallery__link{
+    position: absolute;
+    top: 7rem;
+    left: 1rem;
+    font-family: ABCMonumentGrotesk;
+    color: #8B3D6B;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 400;
+    cursor: pointer;
+    z-index: 10;
+}
+.gallery__mask h1 span,
+.gallery__mask p span {
+  display: inline-block;
 }

@@ -6,6 +6,7 @@ import gsap from "gsap";
 import Zoetrope from "./Zoetrope";
 import { Link } from "react-router-dom";
 
+
 const useWindowWidth = () => {
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {

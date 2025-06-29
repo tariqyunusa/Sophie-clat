@@ -6,6 +6,7 @@ import About from './pages/About.jsx'
 import Collections from './pages/Collections'
 import Gallery from './pages/Gallery.jsx'
 
+
 createRoot(document.getElementById('root')).render(
 
     <BrowserRouter>
