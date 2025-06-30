@@ -7,12 +7,9 @@ import "../styles/Nav.css";
 
 const Nav = () => {
   const location = useLocation();
-
-  // Refs for nav links and icon
   const navRefs = useRef([]);
   const iconRef = useRef(null);
 
-  // Reset refs on render
   navRefs.current = [];
   const addToRefs = (el) => {
     if (el && !navRefs.current.includes(el)) {
@@ -21,18 +18,13 @@ const Nav = () => {
   };
 
   useEffect(() => {
-    gsap.fromTo(
-      [...navRefs.current, iconRef.current],
-      { y: -100, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.05,
-        duration: 1,
-        ease: "power2.out",
-      }
-    );
-  }, [location.pathname]); 
+    gsap.from([...navRefs.current, iconRef.current], {
+      y: -150,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+    });
+  }, []);
 
   const links = [
     { to: "/", label: "Sophie’s Éclat" },
@@ -49,18 +41,18 @@ const Nav = () => {
             to={link.to}
             ref={addToRefs}
             className={`nav ${
-              location.pathname === link.to && link.to !== "/" ? "nav--active" : ""
+              location.pathname === link.to && link.to !== "/"
+                ? "nav--active"
+                : ""
             }`}
           >
             {link.label}
           </AnimatedLink>
         </div>
       ))}
-    <div ref={iconRef} className="nav nav_icon_wrapper">
-  <GoPlus className="nav_icon" />
-</div>
-
-
+      <div ref={iconRef} className="nav nav_icon_wrapper">
+        <GoPlus className="nav_icon" />
+      </div>
     </nav>
   );
 };

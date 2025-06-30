@@ -39,16 +39,14 @@
 .nav_icon {
   font-size: 1.5rem;
   color: #8b3d6b;
-  opacity: 0;
-  transform: translateY(-30px);
   transition: all 0.3s ease;
   display: inline-block; 
 }
 
 .nav_icon_wrapper {
   display: inline-block;
-  opacity: 0;
-  transform: translateY(-30px);
+  opacity: 1;
+  /* transform: translateY(-30px); */
   will-change: transform, opacity;
 }
 
