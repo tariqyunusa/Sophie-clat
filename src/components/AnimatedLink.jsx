@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { heroExit } from '../animations/HeroAnimation';
+import { heroExit } from '../animations/heroAnimation';
 import { aboutExit } from '../animations/aboutAnimation';
 import { collectionExit } from '../animations/collectionAnimation';
 import { galleryExit } from '../animations/galleryAnimation';
@@ -12,7 +12,6 @@ export const exitAnimations = {
   "/gallery": galleryExit
 };
 
-// ✅ Add forwardRef
 const AnimatedLink = React.forwardRef(({ to, className, children }, ref) => {
   const navigate = useNavigate();
   const location = useLocation();
