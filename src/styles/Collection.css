@@ -1,11 +1,11 @@
 @font-face {
   font-family: "PPPlayground";
-  src: url("/public/public/PPPlayground-Thin.otf") format("opentype");
+  src: url("/public/PPPlayground-Thin.otf") format("opentype");
   font-weight: 300;
 }
 @font-face {
   font-family: "ABCMonumentGrotesk";
-  src: url("/public/MonumentGrotesk-Regular.ttf") format("truetype");
+  src: url("/MonumentGrotesk-Regular.ttf") format("truetype");
 }
 .collections__section {
   width: 100vw;

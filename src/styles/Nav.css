@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'ABCMonumentGrotesk';
-  src: url('/public/MonumentGrotesk-Regular.ttf') format('truetype');
+  src: url('/MonumentGrotesk-Regular.ttf') format('truetype');
 }
 
 .nav__section {

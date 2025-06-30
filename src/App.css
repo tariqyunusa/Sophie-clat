@@ -9,7 +9,7 @@
 }
 @font-face {
     font-family: 'PPPlayground';
-    src: url('/public/PPPlayground-medium.otf') format('opentype');
+    src: url('/PPPlayground-medium.otf') format('opentype');
     font-weight: 300;
 }
 .hero__section {

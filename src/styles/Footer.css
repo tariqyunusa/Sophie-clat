@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'monument-grotesk';
-    src: url('/public/MonumentGrotesk-Regular.ttf') format('truetype');
+    src: url('/MonumentGrotesk-Regular.ttf') format('truetype');
 
 }
 .footer{
