@@ -107,9 +107,9 @@
   transform: translateY(0); 
 }
 @media screen and (max-width: 768px) {
-   /* .headline__main{
-   align-items: center;
-   } */
+   .headline__main{
+   height: 33vh;
+   }
   .headline__main h1{
     font-size: 6rem;
   }
