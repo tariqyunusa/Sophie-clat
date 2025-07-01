@@ -96,4 +96,15 @@
   border-radius: 50%;
 }
 
+@media screen and (max-width: 768px) {
+  .nav__section a {
+    font-size: 0.7rem;
+  }
+  .nav_icon_wrapper {
+    display: none;
+  }
+  .nav__section .nav__wrapper:first-of-type .nav {
+  padding: 0;
+}
 
+}

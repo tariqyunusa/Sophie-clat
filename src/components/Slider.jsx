@@ -5,12 +5,9 @@ import "../styles/Slider.css";
 import FadeMaterial from "./FadeMaterial";
 import * as THREE from "three";
 import gsap from "gsap";
-import GrayscaleMaterial from "./GrayScaleMaterial"
+import GrayscaleMaterial from "./GrayScaleMaterial";
 extend({ GrayscaleMaterial });
 extend({ FadeMaterial });
-
-
-
 
 const getWrappedIndex = (idx, length) => ((idx % length) + length) % length;
 
@@ -18,28 +15,27 @@ const DisplayPlane = ({ scrollValue, textures, phase }) => {
   const matRef = useRef();
   const meshRef = useRef();
   useEffect(() => {
-  if (matRef.current) {
-    gsap.fromTo(
-      matRef.current.uniforms.twistFactor,
-      { value: 0.8 },
-      {
-        value: 0.0,
-        duration: 2,
-        ease: "power4.out"
-      }
-    );
-  }
-}, []);
+    if (matRef.current) {
+      gsap.fromTo(
+        matRef.current.uniforms.twistFactor,
+        { value: 0.8 },
+        {
+          value: 0.0,
+          duration: 2,
+          ease: "power4.out",
+        }
+      );
+    }
+  }, []);
 
   useEffect(() => {
     const mesh = meshRef.current;
     const material = matRef.current;
 
     if (mesh && material) {
-
       mesh.rotation.y = THREE.MathUtils.degToRad(35);
       mesh.position.z = -2;
-      mesh.position.x = -1; 
+      mesh.position.x = -1;
       mesh.scale.set(0.9, 0.95, 0.9);
       material.opacity = 0;
       gsap.to(mesh.rotation, {
@@ -100,40 +96,40 @@ const DisplayPlane = ({ scrollValue, textures, phase }) => {
       }
     };
   }, []);
- const lastScroll = useRef(scrollValue);
+  const lastScroll = useRef(scrollValue);
 
-useEffect(() => {
-  if (!matRef.current) return;
+  useEffect(() => {
+    if (!matRef.current) return;
 
-  const material = matRef.current;
+    const material = matRef.current;
 
-  const currentIdx = Math.floor(scrollValue);
-  const frac = scrollValue - currentIdx;
+    const currentIdx = Math.floor(scrollValue);
+    const frac = scrollValue - currentIdx;
 
-  const direction = scrollValue - lastScroll.current >= 0 ? "forward" : "backward";
+    const direction =
+      scrollValue - lastScroll.current >= 0 ? "forward" : "backward";
 
-  let fromIdx, toIdx, mix;
+    let fromIdx, toIdx, mix;
 
-  if (direction === "forward") {
-    fromIdx = currentIdx;
-    toIdx = currentIdx + 1;
-    mix = frac; // forward mix
-  } else {
-    fromIdx = currentIdx + 1;
-    toIdx = currentIdx;
-    mix = 1.0 - frac; // reverse mix
-  }
+    if (direction === "forward") {
+      fromIdx = currentIdx;
+      toIdx = currentIdx + 1;
+      mix = frac; // forward mix
+    } else {
+      fromIdx = currentIdx + 1;
+      toIdx = currentIdx;
+      mix = 1.0 - frac; // reverse mix
+    }
 
-  const fromTexture = textures[getWrappedIndex(fromIdx, textures.length)];
-  const toTexture = textures[getWrappedIndex(toIdx, textures.length)];
+    const fromTexture = textures[getWrappedIndex(fromIdx, textures.length)];
+    const toTexture = textures[getWrappedIndex(toIdx, textures.length)];
 
-  material.uniforms.texture1.value = fromTexture;
-  material.uniforms.texture2.value = toTexture;
-  material.uniforms.mixFactor.value = mix;
+    material.uniforms.texture1.value = fromTexture;
+    material.uniforms.texture2.value = toTexture;
+    material.uniforms.mixFactor.value = mix;
 
-  lastScroll.current = scrollValue;
-}, [scrollValue, textures]);
-
+    lastScroll.current = scrollValue;
+  }, [scrollValue, textures]);
 
   return (
     <mesh ref={meshRef} position={[0, 0, 0]}>
@@ -149,32 +145,33 @@ useEffect(() => {
   );
 };
 
-
-const ScrollController = ({ scrollTarget, scrollCurrent, setScrollValue, setExternalScrollValue }) => {
+const ScrollController = ({
+  scrollTarget,
+  scrollCurrent,
+  setScrollValue,
+  setExternalScrollValue,
+}) => {
   useFrame(() => {
-    scrollCurrent.current += (scrollTarget.current - scrollCurrent.current) * 0.07;
+    scrollCurrent.current +=
+      (scrollTarget.current - scrollCurrent.current) * 0.07;
 
     const currentScroll = scrollCurrent.current;
 
-    setScrollValue(currentScroll);           // Update DisplayPlane scroll
-    setExternalScrollValue(currentScroll);   // Sync with Gallery
+    setScrollValue(currentScroll);
+    setExternalScrollValue(currentScroll);
   });
 
   return null;
 };
 
-
-
 // Thumbnails
-
-
 
 const Thumbnails = ({ scrollCurrent, textures, phase }) => {
   const groupRef = useRef();
   const visibleCount = 15;
   const spacing = 1.6;
   const materialRefs = useRef([]);
-useEffect(() => {
+  useEffect(() => {
     const meshes = groupRef.current.children;
 
     meshes.forEach((mesh) => {
@@ -224,10 +221,6 @@ useEffect(() => {
     };
   }, []);
 
-
-
-
-
   useFrame(() => {
     const activeIndex = Math.round(scrollCurrent.current) % textures.length;
 
@@ -237,13 +230,19 @@ useEffect(() => {
       mesh.position.y = y;
 
       const virtualIndex = scrollCurrent.current + offset;
-      const wrappedIndex = getWrappedIndex(Math.floor(virtualIndex), textures.length);
+      const wrappedIndex = getWrappedIndex(
+        Math.floor(virtualIndex),
+        textures.length
+      );
 
       const material = materialRefs.current[i];
       if (material) {
         material.map = textures[wrappedIndex];
         material.uniforms.map.value = textures[wrappedIndex];
-        material.uniforms.grayscale.value = wrappedIndex === getWrappedIndex(activeIndex, textures.length) ? 0.0 : 1.0;
+        material.uniforms.grayscale.value =
+          wrappedIndex === getWrappedIndex(activeIndex, textures.length)
+            ? 0.0
+            : 1.0;
         material.needsUpdate = true;
       }
     });
@@ -253,17 +252,16 @@ useEffect(() => {
     <group ref={groupRef} position={[7.5, 0, 0]}>
       {Array.from({ length: visibleCount }).map((_, i) => (
         <mesh key={i} scale={[1, 0, 1]}>
-  <planeGeometry args={[1, 1.4]} />
-  <grayscaleMaterial
-    ref={(ref) => (materialRefs.current[i] = ref)}
-    map={textures[0]}
-    grayscale={1.0}
-    toneMapped={false}
-    transparent={true} 
-    opacity={0} 
-  />
-</mesh>
-
+          <planeGeometry args={[1, 1.4]} />
+          <grayscaleMaterial
+            ref={(ref) => (materialRefs.current[i] = ref)}
+            map={textures[0]}
+            grayscale={1.0}
+            toneMapped={false}
+            transparent={true}
+            opacity={0}
+          />
+        </mesh>
       ))}
     </group>
   );
@@ -276,14 +274,12 @@ const Slider = ({ images, setScrollValue }) => {
   const scrollTarget = useRef(0);
   const scrollCurrent = useRef(0);
 
-  // 🟢 Local state used for DisplayPlane
   const [scrollValue, setLocalScrollValue] = useState(0);
 
   const [phase, setPhase] = useState("entering");
   const [showThumbnails, setShowThumbnails] = useState(true);
   const scrollStopTimeout = useRef();
 
-  // 🟣 Handle wheel scroll input
   const handleScroll = (e) => {
     e.preventDefault();
     scrollTarget.current += e.deltaY * 0.002;
@@ -299,32 +295,28 @@ const Slider = ({ images, setScrollValue }) => {
     return () => window.removeEventListener("wheel", handleScroll);
   }, []);
 
-  // 🟢 Sync local scrollValue to parent (Gallery)
-//   useFrame(() => {
-//   setScrollValue(scrollCurrent.current);
-// });
-
-
   return (
     <div className="slider">
       <div className="gallery__canvas_wrapper">
         <Canvas camera={{ position: [0, 0, 6] }}>
           <ambientLight />
-        <ScrollController
-  scrollTarget={scrollTarget}
-  scrollCurrent={scrollCurrent}
-  setScrollValue={setLocalScrollValue}
-  setExternalScrollValue={setScrollValue} // 👈 new
-/>
+          <ScrollController
+            scrollTarget={scrollTarget}
+            scrollCurrent={scrollCurrent}
+            setScrollValue={setLocalScrollValue}
+            setExternalScrollValue={setScrollValue} 
+          />
 
           <DisplayPlane scrollValue={scrollValue} textures={textures} />
-          <Thumbnails scrollCurrent={scrollCurrent} textures={textures} phase={phase} />
+          <Thumbnails
+            scrollCurrent={scrollCurrent}
+            textures={textures}
+            phase={phase}
+          />
         </Canvas>
       </div>
     </div>
   );
 };
-
-
 
 export default Slider;

@@ -9,7 +9,7 @@
 }
 @font-face {
     font-family: 'PPPlayground';
-    src: url('/PPPlayground-medium.otf') format('opentype');
+    src: url('/PPPlayground-Thin.otf') format('opentype');
     font-weight: 300;
 }
 .hero__section {
@@ -50,7 +50,7 @@
 .headline__main h1 {
   font-family: F-37Judge-BoldCondensed;
   font-weight: 700;
-  font-size: 290px;
+  font-size:  18.125rem;
   line-height: 78%;
  letter-spacing: 0%;
  color: #8b3d6b;
@@ -82,8 +82,8 @@
 
 .header_2__time h1{
   font-family: PPPlayground;
-  font-weight: 500;
-  font-size: 8rem;
+  font-weight: 300;
+  font-size:  8rem;
   line-height: 0.8;
 }
 .header_3__spacer{
@@ -92,8 +92,8 @@
   gap: 1rem;
 }
 .main__image{
-  width: 226px;
-  height: 259px;
+  width: 14.125rem;
+  height: 16.188rem;
   overflow: hidden;
 }
 .main__image img{
@@ -105,4 +105,46 @@
 .hero__list {
   display: inline-block; 
   transform: translateY(0); 
+}
+@media screen and (max-width: 768px) {
+   /* .headline__main{
+   align-items: center;
+   } */
+  .headline__main h1{
+    font-size: 6rem;
+  }
+  .header_2__time{
+    display: none;
+  }
+  .header-1 h1{
+    margin-left: 0rem;
+  }
+  .header_2__time h1{
+    font-size: 3rem;
+
+  }
+  .header__second{
+    margin-left: 2rem;
+  }
+  .hero__main ul{
+    display: none;
+  }
+  .main__image{
+    width: 5rem;
+    height: 5.5rem;
+  }
+  .hero__main{
+    height: 50%;
+    align-items: normal;
+    justify-content: center;
+  }
+  .hero__section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .header_3__spacer{
+    gap: 0.5rem;
+  }
+ 
 }
