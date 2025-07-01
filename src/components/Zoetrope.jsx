@@ -12,9 +12,9 @@ const Zoetrope = ({ items, isMobile, phase, images }) => {
   const groupRef = useRef();
   const meshRefs = useRef([]);
 
-  const radius = isMobile ? 60 : 104;
-  const baseAngle = (2 * Math.PI) / images.length;      
-  const curvedAngle = baseAngle * 0.90;                
+  const radius = isMobile ? 50 : 104;
+  const baseAngle = isMobile ?  (2 * Math.PI) / images.length :(2 * Math.PI) / images.length;      
+  const curvedAngle = isMobile ? baseAngle * 0.95 : baseAngle * 0.90;                
 
   const textures = useLoader(
     TextureLoader,
@@ -85,8 +85,8 @@ const Zoetrope = ({ items, isMobile, phase, images }) => {
   return (
     <group
       ref={groupRef}
-      scale={isMobile ? 1.5 : 1}
-      position={[10, isMobile ? 20 : 30, 0]}
+      scale={isMobile ? 1 : 1}
+      position={[0, isMobile ? 25 : 30, 0]}
     >
       {textures.map((texture, idx) => (
         <mesh
@@ -94,7 +94,7 @@ const Zoetrope = ({ items, isMobile, phase, images }) => {
           ref={(el) => (meshRefs.current[idx] = el)}
           position={[0, -80, 0]}
         >
-          <planeGeometry args={[10, 55, 100, 100]} />
+          <planeGeometry args={[ 10,isMobile ? 40 : 55, 100, 100]} />
           <curvedSliceMaterial
             map={texture}
             radius={radius}

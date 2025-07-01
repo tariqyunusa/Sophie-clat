@@ -36,7 +36,7 @@ const Layout = ({ layout, items, images }) => {
   const [showZoetrope, setShowZoetrope] = useState(layout === "zoetrope");
   const [isZoetropeFullyGone, setIsZoetropeFullyGone] = useState(layout !== "zoetrope");
 
-  // Handle layout switch request
+
   useEffect(() => {
     if (layout === currentLayout) return;
   
@@ -127,7 +127,7 @@ const Layout = ({ layout, items, images }) => {
       }
   
       else {
-        // No animation needed
+      
         setCurrentLayout(layout);
       }
     };
@@ -136,7 +136,6 @@ const Layout = ({ layout, items, images }) => {
   }, [layout, currentLayout]);
   
 
-  // Handle Zoetrope transitions
   useEffect(() => {
     if (currentLayout === "zoetrope") {
       setIsZoetropeFullyGone(false);
@@ -170,14 +169,13 @@ const Layout = ({ layout, items, images }) => {
 
       const tl = gsap.timeline();
 
-      // Animate border
       tl.fromTo(
         el,
         { width: "0%" },
         { width: "100%", duration: 1, ease: "power2.inOut" }
       );
 
-      // Animate image
+   
       tl.fromTo(
         image,
         { x: -50, opacity: 0, scale: 0.95 },
@@ -185,7 +183,6 @@ const Layout = ({ layout, items, images }) => {
         "<"
       );
 
-      // Name (chars)
       const nameChars = nameEl.textContent.split("");
       nameEl.innerHTML = "";
       nameChars.forEach((char) => {
@@ -261,7 +258,7 @@ const Layout = ({ layout, items, images }) => {
           ease: "power2.out",
           stagger: 0.05,
         },
-        "-=0.8"
+        "-=0.4"
       );
     });
   }, [currentLayout, isZoetropeFullyGone]);
@@ -309,13 +306,13 @@ const Layout = ({ layout, items, images }) => {
     <div className="layout">
       {showZoetrope ? (
         <div className="canvas-container">
-          <Canvas camera={{ position: [0, 70, 400], fov: 25 }} key={canvasKey}>
+          <Canvas camera={{ position: [0, 70, isMobile? 210: 400], fov: 25 }} key={canvasKey}>
             <ambientLight />
             <Zoetrope items={items} isMobile={isMobile} phase={zoetropePhase} images={images} />
           </Canvas>
         </div>
       ) : (
-        <div ref={containerRef} className={`container ${currentLayout}`}>
+        <div ref={containerRef} className={`container `}>
           {currentLayout === "grid" ? (
             <div className="grid">
               {items.map((item, idx) => (
