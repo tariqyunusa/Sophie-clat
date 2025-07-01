@@ -14,14 +14,14 @@
 }
 .about__section {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #e7d5e4;
   display: flex;
   flex-direction: column;
   padding: 1rem;
 }
 .about__main_section {
-  height: 100vh;
+  /* min-height: 100vh; */
   margin: 2rem 0;
 }
 .about__headline {
@@ -152,7 +152,6 @@
 .about_collection{
     display: flex;
     align-items: end;
-    /* width: 400px; */
 }
 .about_collection a{
 font-family: ABCMonumentGrotesk;
@@ -163,7 +162,6 @@ font-family: ABCMonumentGrotesk;
   position: relative;
   display: block;
   overflow: hidden;
-  /* line-height: 1.4; */
   white-space: normal;
    hyphens: auto;
   word-break: normal;
@@ -182,7 +180,7 @@ font-family: ABCMonumentGrotesk;
   word-spacing: 0.03rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .about__personal{
     display: flex;
     flex-direction: column;
@@ -229,7 +227,6 @@ font-family: ABCMonumentGrotesk;
   flex-direction: column;
 }
 .about{
-  /* padding-right: 1rem; */
   width: 98%;
 }
 .about p {
@@ -246,7 +243,27 @@ font-family: ABCMonumentGrotesk;
     width: 100%;
     height: 70%;
   }
-  .about__section{
-    height: 140vh;
+ 
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+   .about__italics {
+    font-size: 6rem;
+  }
+  .about__header{
+    font-size: 6rem;
+  }
+
+  .about__second_section{
+  flex-direction: row;
+}
+.about__personal{
+  flex-direction: row;
+  padding: 0;
+}
+.about__headline{
+  height: 50%;
+}
+.about__personal_text p{
+    font-size: 1rem;
   }
 }
