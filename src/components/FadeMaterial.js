@@ -10,7 +10,6 @@ const FadeMaterial = shaderMaterial(
   },
   // Vertex Shader
   `
-   // Vertex Shader (Add this inside your FadeMaterial)
 uniform float twistFactor;
 varying vec2 vUv;
 
